@@ -1,13 +1,20 @@
 <?php
 
 session_start();
-setcookie("name","cookie", time()+500);
+setcookie("name", "cookie", time() + 500);
 require_once 'model.php';
 
-$user = new User();
-$user->login = $_POST['login'];
-$user->password = $_POST['password'];
+if(
+    isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+    strcasecmp($_SERVER['HTTP_X_REQUESTED_WITH'], 'xmlhttprequest') == 0
+){
+    $user = new User();
+    $user->login = $_POST['login'];
+    $user->password = $_POST['password'];
+}else{die();}
+
 $checked = false;
+
 
 $error_fields = [];
 

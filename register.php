@@ -18,7 +18,7 @@ if (isset($_SESSION['user']) && isset($_COOKIE['name'])) {
     <input type="text" name="name" placeholder="Enter your name">
     <label>Login</label>
     <input type="text" name="login" placeholder="Enter your login">
-    <label>Почта</label>
+    <label>Email</label>
     <input type="email" name="email" placeholder="Enter your email">
     <label>Password</label>
     <input type="password" name="password" placeholder="Enter your password">
