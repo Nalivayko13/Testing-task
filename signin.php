@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+setcookie("name","cookie", time()+500);
 require_once 'model.php';
 
 $user = new User();

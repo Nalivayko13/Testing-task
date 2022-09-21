@@ -1,8 +1,9 @@
 <?php
 session_start();
-if (isset($_SESSION['user'])) {
+if (isset($_SESSION['user']) && isset($_COOKIE['name'])) {
     header('Location: profile.php');
 }
+
 ?>
 <!doctype html>
 <html lang="en">
