@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 if (isset($_SESSION['user'])) {
     header('Location: profile.php');
 }
@@ -15,19 +14,18 @@ if (isset($_SESSION['user'])) {
     <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
-<form action="signin.php" method="POST">
-    <p>Login: <input type="text" name="login" /></p>
+
+<form>
+    <p>Login: <input type="text" name="login"/></p>
     <p>Password: <input type="password" name="password" /></p>
-    <button type="submit">log in</button>
+    <button type="submit" class="login-btn">log in</button>
     <p>
-        Have an account? - <a href="/second/register.php">sign up</a>!
+        Have an account? - <a href="/second/register.php">sign up</a>
     </p>
-    <?php
-    if (isset($_SESSION['message'])) {
-        echo '<p class="msg"> ' . $_SESSION['message'] . ' </p>';
-    }
-    unset($_SESSION['message']);
-    ?>
+    <p class="msg none">Lorem ipsum dolor sit amet.</p>
 </form>
+
+<script src="assets/js/jquery.js"></script>
+<script src="assets/js/main.js"></script>
 </body>
 </html>

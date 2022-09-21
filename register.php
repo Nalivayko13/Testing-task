@@ -8,13 +8,11 @@ if (isset($_SESSION['user'])) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Testing</title>
+    <title>Testing Task</title>
     <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
-
-
-<form action="signup.php" method="post" enctype="multipart/form-data">
+<form>
     <label>Name</label>
     <input type="text" name="name" placeholder="Enter your name">
     <label>Login</label>
@@ -25,17 +23,13 @@ if (isset($_SESSION['user'])) {
     <input type="password" name="password" placeholder="Enter your password">
     <label>Confirm password</label>
     <input type="password" name="password_confirm" placeholder="Repeat your password">
-    <button type="submit">Submit</button>
+    <button type="submit" class="register-btn">sigh up</button>
     <p>
         Have an account? - <a href="/second/index.php">log in</a>!
     </p>
-    <?php
-    if (isset($_SESSION['message'])) {
-        echo '<p class="msg"> ' . $_SESSION['message'] . ' </p>';
-    }
-    unset($_SESSION['message']);
-    ?>
+    <p class="msg none">Lorem ipsum.</p>
 </form>
-
+<script src="assets/js/jquery.js"></script>
+<script src="assets/js/main.js"></script>
 </body>
 </html>
