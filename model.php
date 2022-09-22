@@ -11,3 +11,24 @@ class User
 
 }
 
+class DataBase
+{
+    public $login, $password, $email, $name;
+
+    function Create(){
+
+    }
+
+    function Read(){
+
+    }
+
+    function Update(){
+
+    }
+
+    function Delete(){
+
+    }
+}
+

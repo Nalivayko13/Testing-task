@@ -23,40 +23,39 @@ if(
 $error_fields = [];
 
 if (strlen($user->password) <= 5 || $user->password == '' || preg_match("|\s|", $user->password)
-    || !preg_match("#[0-9]+#",$user->password) || !preg_match("#[A-z]+#",$user->password)) {
+    || !preg_match("#[0-9]+#",$user->password) || !preg_match("#[A-z]+#",$user->password)
+    || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $user->password) ) {
     $error_fields[] = 'password';
 }
 
-if (strlen($user->name) <= 1 || $user->name == '' || preg_match("|\s|", $user->name)) {
+if (strlen($user->name) <= 1 || $user->name == '' || preg_match("|\s|", $user->name)
+    || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $user->name) || preg_match("#[0-9]+#",$user->password)) {
     $error_fields[] = 'name';
 }
 
-if (strlen($user->login) <= 5 || $user->login == '' || preg_match("|\s|", $user->login)) {
+if (strlen($user->login) <= 5 || $user->login == '' || preg_match("|\s|", $user->login)
+    || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $user->login)) {
     $error_fields[] = 'login';
 }
 
-if ($user->email == '' || !filter_var($user->email, FILTER_VALIDATE_EMAIL) || preg_match("|\s|", $user->email)) {
+if ($user->email == '' || !filter_var($user->email, FILTER_VALIDATE_EMAIL) || preg_match("|\s|", $user->email
+    || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $user->email))) {
   $error_fields[] = 'email';
 }
 
 if (strlen($password_confirm)<=5 || $password_confirm == '' || preg_match("|\s|", $password_confirm)) {
     $error_fields[] = 'password_confirm';
 }
-/*
-if (isExists($user)){
-    $response = [
-        "status" => false,
-        "type" => 1,
-        "message" => "such user already exists",
-        "fields" => "name"
-    ];
 
-    echo json_encode($response);
+if (isExists($user)=='login'){
+    $error_fields[] = 'login';
+}
 
-    die();
-}*/
+if (isExists($user)=='email'){
+    $error_fields[]= 'email';
+}
 
-if (!empty($error_fields)) {
+if (!empty($error_fields) || isExists($user)!='') {
     $response = [
         "status" => false,
         "type" => 1,

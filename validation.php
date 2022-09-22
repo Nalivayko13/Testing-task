@@ -1,5 +1,7 @@
 <?php
 
+require_once "model.php";
+
 function isExists(User $user){
     $json = file_get_contents('data.json');
     $json2 = json_decode($json, true);
@@ -9,9 +11,15 @@ function isExists(User $user){
         $users[$i] = (object)$json2[$i];
     }
     for ($i = 0; $i <  count($json2); $i++) {
-        if ($user->login == $json2[$i]->login || $user->email == $json2[$i]->email) {
-            return true;
+        if ($user->login == $users[$i]->login) {
+            return 'login';
         }
     }
-    return false;
+
+    for ($i = 0; $i <  count($json2); $i++) {
+        if ( $user->email == $users[$i]->email) {
+            return 'email';
+        }
+    }
+    return '';
 }
