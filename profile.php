@@ -15,8 +15,8 @@ if (!isset($_SESSION['user']) || !isset($_COOKIE['name'])) {
 <body>
 
 <form>
-    <label>Hello!</label>
-    <h2 style="margin: 10px 0;"><?= $_SESSION['user']['name'] ?></h2><br>
+    <label></label>
+    <h2 style="margin: 10px 0;"> Hello, <?= $_SESSION['user']['name'] ?> !</h2><br>
     <a href="#"><?= $_SESSION['user']['email'] ?></a>
     <a href="logout.php" class="logout">log out</a>
 </form>

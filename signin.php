@@ -41,16 +41,8 @@ if (!empty($error_fields)) {
 
 $user->password = md5($user->password);
 
-$json = file_get_contents('data.json');
-$json2 = json_decode($json, true);
-$_SESSION['json2'] = $json2;
-$users = [];
-for ($i = 0; $i < count($json2); $i++) {
-    $users[$i] = new User();
-    $users[$i] = (object)$json2[$i];
-}
-$_SESSION['users'] = $users;
-
+$db = new Json();
+$_SESSION['users'] = $db->GetUsers();
 
 for ($i = 0; $i < count($_SESSION['users']); $i++) {
     if ($user->login == $_SESSION['users'][$i]->login && $user->password == $_SESSION['users'][$i]->password) {

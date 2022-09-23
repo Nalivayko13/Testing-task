@@ -21,6 +21,7 @@ if(
 //TODO: validation !!!
 
 $error_fields = [];
+$db=new Json();
 
 if (strlen($user->password) <= 5 || $user->password == '' || preg_match("|\s|", $user->password)
     || !preg_match("#[0-9]+#",$user->password) || !preg_match("#[A-z]+#",$user->password)
@@ -29,7 +30,7 @@ if (strlen($user->password) <= 5 || $user->password == '' || preg_match("|\s|", 
 }
 
 if (strlen($user->name) <= 1 || $user->name == '' || preg_match("|\s|", $user->name)
-    || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $user->name) || preg_match("#[0-9]+#",$user->password)) {
+    || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $user->name) || preg_match("#[0-9]+#",$user->name)) {
     $error_fields[] = 'name';
 }
 
@@ -47,12 +48,13 @@ if (strlen($password_confirm)<=5 || $password_confirm == '' || preg_match("|\s|"
     $error_fields[] = 'password_confirm';
 }
 
-if (isExists($user)=='login'){
+
+if ($db->CheckUnique($user)=='login'){
     $error_fields[] = 'login';
 }
 
-if (isExists($user)=='email'){
-    $error_fields[]= 'email';
+if ($db->CheckUnique($user)=='email'){
+    $error_fields[] = 'email';
 }
 
 if (!empty($error_fields) || isExists($user)!='') {
@@ -72,17 +74,7 @@ if (!empty($error_fields) || isExists($user)!='') {
 if ($user->password == $password_confirm) {
     $user->password = md5($user->password);
 
-    $json = file_get_contents('data.json');
-    $json2 = json_decode($json, true);
-    $_SESSION['json2'] = $json2;
-    $users = [];
-    for ($i = 0; $i < count($json2); $i++) {
-        $users[$i] = new User();
-        $users[$i] = (object)$json2[$i];
-    }
-    $_SESSION['users'] = $users;
-    $_SESSION['users'][] = $user;
-    file_put_contents('data.json', json_encode($_SESSION['users']));
+    $db->InsertUser($user);
 
     $_SESSION['message'] = 'Successful';
     $response = [
@@ -90,7 +82,6 @@ if ($user->password == $password_confirm) {
         "message" => "Successful",
     ];
     echo json_encode($response);
-    //header('Location: /second/index.php');
 
 
 } else {
@@ -100,7 +91,6 @@ if ($user->password == $password_confirm) {
         "message" => "Passwords must match",
     ];
     echo json_encode($response);
-    //header('Location: /second/register.php');
 }
 
 ?>
