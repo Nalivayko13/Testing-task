@@ -38,8 +38,8 @@ if (!empty($error_fields)) {
 
     die();
 }
-
-$user->password = md5($user->password);
+///////////////////////////////////////
+$user->password = md5($user->password . "MyUniqueSalt");
 
 $db = new Json();
 $_SESSION['users'] = $db->GetUsers();

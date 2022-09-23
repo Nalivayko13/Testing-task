@@ -72,7 +72,7 @@ if (!empty($error_fields) || isExists($user)!='') {
 
 
 if ($user->password == $password_confirm) {
-    $user->password = md5($user->password);
+    $user->password = md5($user->password . "MyUniqueSalt");
 
     $db->InsertUser($user);
 
