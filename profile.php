@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['user']) || !isset($_COOKIE['name'])) {
+if (!isset($_SESSION['user']) && !isset($_COOKIE['name'])) {
     header('Location: index.php');
 }
 ?>
@@ -16,7 +16,7 @@ if (!isset($_SESSION['user']) || !isset($_COOKIE['name'])) {
 
 <form>
     <label></label>
-    <h2 style="margin: 10px 0;"> Hello, <?= $_SESSION['user']['name'] ?> !</h2><br>
+    <h2 style="margin: 8px 0;"> Hello, <?= $_SESSION['user']['name'] ?> !</h2><br>
     <a href="#"><?= $_SESSION['user']['email'] ?></a>
     <a href="logout.php" class="logout">log out</a>
 </form>

@@ -4,14 +4,16 @@ session_start();
 setcookie("name", "cookie", time() + 500);
 require_once 'model.php';
 
-if(
+if (
     isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
     strcasecmp($_SERVER['HTTP_X_REQUESTED_WITH'], 'xmlhttprequest') == 0
-){
+) {
     $user = new User();
     $user->login = $_POST['login'];
     $user->password = $_POST['password'];
-}else{die();}
+} else {
+    die();
+}
 
 $checked = false;
 
@@ -38,7 +40,7 @@ if (!empty($error_fields)) {
 
     die();
 }
-///////////////////////////////////////
+
 $user->password = md5($user->password . "MyUniqueSalt");
 
 $db = new Json();
@@ -75,5 +77,3 @@ if ($checked) {
     echo json_encode($response);
 }
 ?>
-
-

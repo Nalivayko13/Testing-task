@@ -2,7 +2,7 @@
 
 session_start();
 require_once 'model.php';
-require_once 'validation.php';
+
 
 if(
     isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
@@ -16,9 +16,6 @@ if(
     $password_confirm = $_POST['password_confirm'];
 }else {die();}
 
-
-
-//TODO: validation !!!
 
 $error_fields = [];
 $db=new Json();
@@ -40,11 +37,12 @@ if (strlen($user->login) <= 5 || $user->login == '' || preg_match("|\s|", $user-
 }
 
 if ($user->email == '' || !filter_var($user->email, FILTER_VALIDATE_EMAIL) || preg_match("|\s|", $user->email
-    || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $user->email))) {
-  $error_fields[] = 'email';
+        || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $user->email))) {
+    $error_fields[] = 'email';
 }
 
-if (strlen($password_confirm)<=5 || $password_confirm == '' || preg_match("|\s|", $password_confirm)) {
+if (strlen($password_confirm)<=5 || $password_confirm == '' || preg_match("|\s|", $password_confirm)
+    || $user->password != $password_confirm) {
     $error_fields[] = 'password_confirm';
 }
 
@@ -57,7 +55,7 @@ if ($db->CheckUnique($user)=='email'){
     $error_fields[] = 'email';
 }
 
-if (!empty($error_fields) || isExists($user)!='') {
+if (!empty($error_fields) || $db->CheckUnique($user)!='') {
     $response = [
         "status" => false,
         "type" => 1,
