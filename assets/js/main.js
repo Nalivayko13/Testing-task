@@ -18,7 +18,7 @@ $('.login-btn').click(function (e) {
         success(data) {
 
             if (data.status) {
-                document.location.href = '/second/profile.php';
+                document.location.href = 'profile.php';
             } else {
 
                 if (data.type === 1) {
@@ -60,7 +60,7 @@ $('.register-btn').click(function (e) {
         success(data) {
 
             if (data.status) {
-                document.location.href = '/second/index.php';
+                document.location.href = 'index.php';
             } else {
 
                 if (data.type == 1) {
