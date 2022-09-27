@@ -20,7 +20,7 @@ if (isset($_SESSION['user']) && isset($_COOKIE['name'])) {
     <p>Password: <input type="password" name="password" /></p>
     <button type="submit" class="login-btn">log in</button>
     <p>
-        Have an account? - <a href="/second/register.php">sign up</a>
+        Have an account? - <a href="register.php">sign up</a>
     </p>
     <p class="msg none">Lorem ipsum dolor sit amet.</p>
 </form>

@@ -26,7 +26,7 @@ if (isset($_SESSION['user']) && isset($_COOKIE['name'])) {
     <input type="password" name="password_confirm" placeholder="Repeat your password">
     <button type="submit" class="register-btn">sigh up</button>
     <p>
-        Have an account? - <a href="/second/index.php">log in</a>!
+        Have an account? - <a href="index.php">log in</a>!
     </p>
     <p class="msg none">Lorem ipsum.</p>
 </form>
