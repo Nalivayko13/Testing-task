@@ -1,5 +1,3 @@
-<Files “data.json”>
-Order allow,deny
-Deny from all
+<Files "data.json">
+    Require all denied
 </Files>
-
