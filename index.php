@@ -15,7 +15,7 @@ if (isset($_SESSION['user']) && isset($_COOKIE['name'])) {
 </head>
 <body>
 
-<form>
+<form id="indexid" style="display:none">
     <p>Login: <input type="text" name="login"/></p>
     <p>Password: <input type="password" name="password" /></p>
     <button type="submit" class="login-btn">log in</button>
@@ -27,5 +27,9 @@ if (isset($_SESSION['user']) && isset($_COOKIE['name'])) {
 
 <script src="assets/js/jquery.js"></script>
 <script src="assets/js/main.js"></script>
+<script type="text/javascript">
+    document.getElementById( "indexid" ).style.display = "block";
+</script>
+
 </body>
 </html>

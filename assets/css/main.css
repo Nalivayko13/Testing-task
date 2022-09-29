@@ -37,10 +37,12 @@ input {
 }
 
 button {
+    font: bold 15px Arial;
     padding: 10px;
     background: #e3e3e3;
     border: unset;
     cursor: pointer;
+    width: 400px;
 }
 
 .error {
